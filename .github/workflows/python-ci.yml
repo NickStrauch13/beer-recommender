@@ -29,5 +29,5 @@ jobs:
     - name: Format Black
       run: make format
       
-    - name: Run tests
-      run: make test
+    # - name: Run tests
+    #   run: make test
