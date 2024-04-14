@@ -91,3 +91,10 @@ def get_top_n_recommendations_NCF(username,ndf, n=10, min_reviews=10):
     df = pd.DataFrame({'beer_id': top_n_beer_ids, 'beer_name': top_n_beer_names, 'predicted_rating': top_n_predictions})
     return df
 
+def get_user_list(ndf):
+    '''
+    Get a list of all users in the dataset
+    '''
+    return ndf['review_profilename'].unique()
+
+
