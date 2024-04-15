@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beer Recommendation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="main-content">
+        <div class="header">
+            <h1>Beer Recommendation System</h1>
+            <p>Enter a user to get beer recommendations</p>
+        </div>
+        <div class="container">
+            <label for="userSelect">Select User:</label>
+            <input type="text" id="userSelect" oninput="filterFunction(this.value)" placeholder="Type to search...">
+            <button id="submitBtn">Get Recommendations</button>
+            <div id="recommendationResults"></div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
