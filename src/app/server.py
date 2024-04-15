@@ -5,11 +5,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('recommendation.html')
+    user_list = get_users().tolist()
+    return render_template('recommendation.html', users=user_list)
 
 @app.route('/get_users', methods=['GET'])
 def get_users_api():
-    users = get_users()
+    users = get_users().tolist()
     return jsonify(users)
 
 @app.route('/recommend_beers', methods=['POST'])
@@ -18,7 +19,8 @@ def recommend_beers():
     username = data['username']
     model = data['model']
     n = int(data['n'])
-    recommended_beers = get_recommendations_for_user(username, model, n) 
+    recommended_beers = get_recommendations_for_user(username, model, n)
+    print(recommended_beers)
     return jsonify(recommended_beers)
 
 if __name__ == '__main__':

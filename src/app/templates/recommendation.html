@@ -10,15 +10,19 @@
     <div class="main-content">
         <div class="header">
             <h1>Beer Recommendation System</h1>
-            <p>Select parameters to get beer recommendations</p>
+            <p>Select user to get beer recommendations</p>
         </div>
         <div class="container">
             <label for="userSelect">Select User:</label>
-            <select id="userSelect"></select>
+            <select id="userSelect">
+                {% for user in users %}
+                <option value="{{ user }}">{{ user }}</option>
+                {% endfor %}
+            </select>
             <label for="modelSelect">Select Model:</label>
             <select id="modelSelect">
+                <option value="NCF">NCF</option>
                 <option value="SVD">SVD</option>
-                <option value="NCF">KNN</option>
             </select>
             <label for="numRecommend">Number of Recommendations:</label>
             <input type="number" id="numRecommend" value="3" min="1" max="10">

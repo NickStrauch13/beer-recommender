@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f9;
     color: #333;
     margin: 0;
@@ -7,71 +7,111 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column; /* Align items vertically */
+    flex-direction: column;
     height: 100vh;
-    text-align: center; /* Center text for the entire body */
+    text-align: center;
+    margin-top:20px
 }
 
 h1 {
     color: #2c3e50;
-    margin-bottom: 0.5em; /* Space between h1 and paragraph */
+    margin-bottom: 0.5em;
 }
 
 .container {
     background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 360px;
-    margin-top: 20px; /* Space between title and container */
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    margin-top: 20px;
+    margin: 20px auto;
 }
 
-#userSelect {
-    width: 100%;
+#userSelect, #modelSelect, #numRecommend {
+    width: calc(100% - 20px);
     padding: 10px;
-    margin: 10px 0;
+    margin-bottom: 10px;
     display: block;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Includes padding and border in the element's width/height */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
 }
 
 #submitBtn {
-    padding: 10px 20px;
-    width: 100%;
-    background-color: #3498db;
+    padding: 12px 20px;
+    width: calc(100% - 24px); /* Slightly less than 100% to account for padding */
+    background-color: #5cb85c;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 #submitBtn:hover {
-    background-color: #2980b9;
+    background-color: #4cae4c;
 }
 
 #recommendationResults {
     margin-top: 10px;
-    padding: 10px;
-    background-color: #f1f1f1;
-    border-radius: 4px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
 }
 
-/* Added styles for alignment and spacing */
 .main-content {
     width: 100%;
-    max-width: 360px;
+    max-width: 700px;
+    margin: 20px auto;
 }
 
 .header p {
     color: #555;
     margin-top: 0;
-    margin-bottom: 1em; /* Space between paragraph and input */
+    margin-bottom: 1em;
 }
 
-/* Ensure the header content is grouped together */
 .header {
-    margin-bottom: 20px; /* Space between header and container */
+    margin-bottom: 20px;
+    margin: 0 auto;
+}
+
+.recommendation-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+}
+
+.recommendation-table th, .recommendation-table td {
+    padding: 10px;
+    text-align: left;
+}
+
+.recommendation-table th {
+    background-color: #4c6991;
+    color: white;
+    font-weight: normal;
+    border-right: 1px solid #f9f9f9;
+}
+
+.recommendation-table td {
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.recommendation-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Add a bit of responsive design */
+@media (max-width: 768px) {
+    .container, #userSelect, #modelSelect, #numRecommend, #submitBtn {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
