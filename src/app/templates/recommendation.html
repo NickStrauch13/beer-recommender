@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beer Recommendation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="main-content">
+        <div class="header">
+            <h1>Beer Recommendation System</h1>
+            <p>Select user to get beer recommendations</p>
+        </div>
+        <div class="container">
+            <label for="userSelect">Select User:</label>
+            <select id="userSelect">
+                {% for user in users %}
+                <option value="{{ user }}">{{ user }}</option>
+                {% endfor %}
+            </select>
+            <label for="modelSelect">Select Model:</label>
+            <select id="modelSelect">
+                <option value="NCF">NCF</option>
+                <option value="SVD">SVD</option>
+            </select>
+            <label for="numRecommend">Number of Recommendations:</label>
+            <input type="number" id="numRecommend" value="3" min="1" max="10">
+            <button id="submitBtn">Get Recommendations</button>
+            <div id="recommendationResults"></div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

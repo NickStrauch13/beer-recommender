@@ -9,10 +9,10 @@ import pickle
 def get_top_n_recommendations_for_SVD(username,ndf, n=10, min_reviews=10, ):
 
     # load the model from the pickle file
-    model = pickle.load(open('../../models/finalized_model.sav', 'rb'))
-    df = pd.read_csv('../../data/beer_reviews.csv')
+    model = pickle.load(open('models/finalized_model.sav', 'rb'))
+    df = pd.read_csv('data/beer_reviews.csv')
     # create beer_id to name dictionary
-    beer_id_to_name = pickle.load(open('../../models/beer_id_to_name.sav', 'rb'))
+    beer_id_to_name = pickle.load(open('models/beer_id_to_name.sav', 'rb'))
     # beer_id_to_name = pd.Series(ndf.beer_name.values, index=ndf.beer_beerid).to_dict()
     # First, get all beer IDs that the user has not rated
     rated_beer_ids = ndf[ndf.review_profilename == username].beer_beerid.unique()
@@ -41,11 +41,11 @@ def get_top_n_recommendations_for_SVD(username,ndf, n=10, min_reviews=10, ):
 
 def get_top_n_recommendations_NCF(username,ndf, n=10, min_reviews=10):
     # load the model from the h5 file 
-    model = load_model('../../models/ncf_model.h5')
+    model = load_model('models/ncf_model.h5')
 
     # load the user and item encoders from the pickle file
-    user_encoder = joblib.load('../../models/user_encoder.pkl')
-    item_encoder = joblib.load('../../models/item_encoder.pkl')
+    user_encoder = joblib.load('models/user_encoder.pkl')
+    item_encoder = joblib.load('models/item_encoder.pkl')
     ndf['user_encoded'] = user_encoder.fit_transform(ndf['review_profilename'])
     ndf['item_encoded'] = item_encoder.fit_transform(ndf['beer_beerid'])
 
@@ -55,7 +55,7 @@ def get_top_n_recommendations_NCF(username,ndf, n=10, min_reviews=10):
     # Create a list of all beer indices
     all_beer_indices = np.arange(num_items)
 
-    beer_id_to_name = pickle.load(open('../../models/beer_id_to_name.sav', 'rb'))
+    beer_id_to_name = pickle.load(open('models/beer_id_to_name.sav', 'rb'))
     
     # Remove the beers that the user has already rated
     beers_rated = ndf[ndf['user_encoded'] == user_index]['item_encoded'].values
