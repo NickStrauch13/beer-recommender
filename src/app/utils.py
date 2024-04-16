@@ -25,14 +25,16 @@ def get_recommendations_for_user(user, model_type, n=3):
     else:
         raise ValueError(f"Invalid model type {model_type}. Must be one of ['SVD', 'NCF']")
     
+    # print(recommendations)
     # Convert recommendations to list of beer names
     recommendation_list = recommendations['beer_id'].tolist()
+    recommendation_ratings = recommendations['predicted_rating'].tolist()
     # Get list of beer information
     beer_info = []
     # Load data
     df = pd.read_csv('data/beer_reviews.csv')
-    for beer_id in recommendation_list:
-        beer_info.append(get_beer_info(beer_id,df))
+    for beer_id, pred_rating in zip(recommendation_list, recommendation_ratings):
+        beer_info.append(get_beer_info(beer_id, pred_rating, df))
     return beer_info
 
 def get_users():
@@ -43,10 +45,9 @@ def get_users():
     '''
     # Load data
     df = pd.read_csv('data/beer_reviews.csv')
-    ndf = df[['review_profilename', 'beer_beerid', 'review_overall']]
-    return get_user_list(ndf)
+    return df['review_profilename'].unique()
 
-def get_beer_info(beer_id, df):
+def get_beer_info(beer_id, pred_rating, df):
     '''
     Get information about a beer
     params:
@@ -65,7 +66,7 @@ def get_beer_info(beer_id, df):
             'Beer Name': beer_info['beer_name'],
             'Brewery': beer_info['brewery_name'],
             'Beer Style': beer_info['beer_style'],
-            'ABV': f"{beer_info['beer_abv']}%"
+            'Predicted Rating': f"{pred_rating:.2f}",
         }
         return beer_details
     else:
