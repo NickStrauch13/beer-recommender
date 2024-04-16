@@ -30,7 +30,7 @@ function displayRecommendations(beers) {
     // Create table header
     let thead = document.createElement('thead');
     let headerRow = document.createElement('tr');
-    ['Beer Name', 'Brewery', 'Beer Style', 'ABV'].forEach(headerText => {
+    ['Beer Name', 'Brewery', 'Beer Style', 'Predicted Rating'].forEach(headerText => {
         let header = document.createElement('th');
         header.textContent = headerText;
         headerRow.appendChild(header);
@@ -46,7 +46,7 @@ function displayRecommendations(beers) {
         tr.appendChild(createCell(beer['Beer Name']));
         tr.appendChild(createCell(beer['Brewery']));
         tr.appendChild(createCell(beer['Beer Style']));
-        tr.appendChild(createCell(beer['ABV']));
+        tr.appendChild(createCell(beer['Predicted Rating']));
         tbody.appendChild(tr);
     });
     table.appendChild(tbody);
