@@ -19,9 +19,9 @@ def get_recommendations_for_user(user, model_type, n=3):
 
     # Get recommendations
     if model_type == 'SVD':
-        recommendations = get_top_n_recommendations_for_SVD(user, ndf, n=n, min_reviews=10)
+        recommendations = get_top_n_recommendations_for_SVD(username=user, ndf=ndf, n=n, min_reviews=10)
     elif model_type == 'NCF':
-        recommendations = get_top_n_recommendations_NCF(user, ndf, n=n, min_reviews=1)
+        recommendations = get_top_n_recommendations_NCF(username=user, ndf=ndf, n=n, min_reviews=1)
     else:
         raise ValueError(f"Invalid model type {model_type}. Must be one of ['SVD', 'NCF']")
     

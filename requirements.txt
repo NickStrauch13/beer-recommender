@@ -17,3 +17,4 @@ werkzeug==2.0.3
 surprise==0.1
 keras==3.2.1
 tensorflow==2.16.1
+scikit-learn==1.4.2
