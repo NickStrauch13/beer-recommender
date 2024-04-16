@@ -1,12 +1,15 @@
 # Beverage Recommendation System
 
 ## Introduction
-This project develops a personalized beer recommendation system using the comprehensive dataset from Kaggle's beer reviews. The system aims to help users discover beers they might like based on their taste preferences and similar users' ratings.
+This project develops a personalized beer recommendation system using the comprehensive dataset from [Kaggle's beer reviews](https://www.kaggle.com/datasets/rdoume/beerreviews). The system aims to help users discover beers they might like based on their taste preferences and similar users' ratings.
 
 ## Features
 **Personalized Recommendations**: Tailor beer suggestions to individual user tastes.
+
 **Rating System**: Users can rate beers on various attributes, improving recommendation accuracy.
+
 **User Profile**s: Customizable user profiles that track taste preferences and rating history.
+
 **Recommendation Engine**: Utilizes both collaborative filtering and content-based filtering techniques.
 
 ## To Run
