@@ -58,5 +58,3 @@ The evaluation results indicate that both the Neural Collaborative Filtering (NC
 ├── requirements.txt
 ├── setup.sh
 ```
-
-
