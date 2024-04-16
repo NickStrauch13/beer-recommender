@@ -61,8 +61,6 @@ def get_beer_info(beer_id, df):
     if not beer_info_df.empty:
         beer_info = beer_info_df.iloc[0].to_dict()
         # Create a dictionary with only the required details
-        if 'beer_abv' == 'NaN':
-            beer_info['beer_abv'] = 0
         beer_details = {
             'Beer Name': beer_info['beer_name'],
             'Brewery': beer_info['brewery_name'],
