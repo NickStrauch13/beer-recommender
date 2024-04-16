@@ -1,3 +1,4 @@
+[![CI](https://github.com/NickStrauch13/beverage-recommender/actions/workflows/python-ci.yml/badge.svg)](https://github.com/NickStrauch13/beverage-recommender/actions/workflows/python-ci.yml)
 # Beverage Recommendation System
 
 <p align="center">
