@@ -45,12 +45,19 @@ def get_top_n_recommendations_NCF(username,ndf, n=10, min_reviews=10):
     # load the user and item encoders from the pickle file
     user_encoder = joblib.load('models/user_encoder.pkl')
     item_encoder = joblib.load('models/item_encoder.pkl')
+    brewery_encoder = joblib.load('models/brewery_encoder.pkl')
+    beer_style_encoder = joblib.load('models/beer_style_encoder.pkl')
     ndf['user_encoded'] = user_encoder.fit_transform(ndf['review_profilename'])
     ndf['item_encoded'] = item_encoder.fit_transform(ndf['beer_beerid'])
+    ndf['brewery_encoded'] = brewery_encoder.fit_transform(ndf['brewery_name'])
+    ndf['beer_style_encoded'] = beer_style_encoder.fit_transform(ndf['beer_style'])
+
 
     user_index = user_encoder.transform([username])[0]
     # num_users = ndf['user_encoded'].nunique()
     num_items = ndf['item_encoded'].nunique()
+    num_breweries = ndf['brewery_encoded'].nunique()
+    num_beer_styles = ndf['beer_style_encoded'].nunique()
     # Create a list of all beer indices
     all_beer_indices = np.arange(num_items)
 
@@ -66,7 +73,14 @@ def get_top_n_recommendations_NCF(username,ndf, n=10, min_reviews=10):
 
     # Make a prediction for the user on all unrated beers
     user_indices = np.array([user_index] * len(beers_unrated))
-    predictions = model.predict([user_indices, beers_unrated])
+    # get the brewery and beer style and the abv which correspond to beers_unrated
+    brewery_indices = ndf['brewery_encoded'][beers_unrated].values
+    beer_style_indices = ndf['beer_style_encoded'][beers_unrated].values
+    abv = ndf['beer_abv'][beers_unrated].values
+    
+
+
+    predictions = model.predict([user_indices, beers_unrated, brewery_indices, beer_style_indices, abv])
 
     # Get the indices that would sort the predictions array
     sorted_indices = np.argsort(predictions, axis=0)[::-1].flatten()
