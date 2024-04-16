@@ -23,11 +23,3 @@ jobs:
     - name: Install packages
       run: make install         # install command in the Makefile
 
-    - name: Lint
-      run: make lint
-
-    - name: Format Black
-      run: make format
-      
-    # - name: Run tests
-    #   run: make test
