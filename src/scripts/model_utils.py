@@ -41,7 +41,7 @@ def get_top_n_recommendations_for_SVD(username,ndf, n=10, min_reviews=10, ):
 
 def get_top_n_recommendations_NCF(username,ndf, n=10, min_reviews=10):
     # load the model from the h5 file 
-    model = load_model('models/ncf_model2.keras', safe_mode=False)
+    model = load_model('models/ncf_model_lightweight.keras', safe_mode=False)
     # load the user and item encoders from the pickle file
     user_encoder = joblib.load('models/user_encoder.pkl')
     item_encoder = joblib.load('models/item_encoder.pkl')
