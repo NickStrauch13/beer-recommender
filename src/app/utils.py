@@ -15,7 +15,7 @@ def get_recommendations_for_user(user, model_type, n=3):
     '''
     # Load data
     df = pd.read_csv('data/beer_reviews.csv')
-    ndf = df[['review_profilename', 'beer_beerid', 'review_overall']]
+    ndf = df[['review_profilename', 'beer_beerid', 'review_overall', 'brewery_name', 'beer_style', 'beer_abv']]
 
     # Get recommendations
     if model_type == 'SVD':
@@ -29,8 +29,10 @@ def get_recommendations_for_user(user, model_type, n=3):
     recommendation_list = recommendations['beer_id'].tolist()
     # Get list of beer information
     beer_info = []
+    # Load data
+    df = pd.read_csv('data/beer_reviews.csv')
     for beer_id in recommendation_list:
-        beer_info.append(get_beer_info(beer_id))
+        beer_info.append(get_beer_info(beer_id,df))
     return beer_info
 
 def get_users():
@@ -44,7 +46,7 @@ def get_users():
     ndf = df[['review_profilename', 'beer_beerid', 'review_overall']]
     return get_user_list(ndf)
 
-def get_beer_info(beer_id):
+def get_beer_info(beer_id, df):
     '''
     Get information about a beer
     params:
@@ -52,14 +54,15 @@ def get_beer_info(beer_id):
     returns:
         dict: Information about the beer
     '''
-    # Load data
-    df = pd.read_csv('data/beer_reviews.csv')
+    
     beer_info_df = df[df['beer_beerid'] == beer_id]
 
     # Check if any entries are found
     if not beer_info_df.empty:
         beer_info = beer_info_df.iloc[0].to_dict()
         # Create a dictionary with only the required details
+        if 'beer_abv' == 'NaN':
+            beer_info['beer_abv'] = 0
         beer_details = {
             'Beer Name': beer_info['beer_name'],
             'Brewery': beer_info['brewery_name'],
